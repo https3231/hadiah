@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Buka Kado</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffecd2, #fcb69f);
+      font-family: Arial, sans-serif;
+    }
+
+    .gift-container {
+      text-align: center;
+    }
+
+    .box {
+      width: 150px;
+      height: 150px;
+      background: linear-gradient(145deg, #ff6f61, #d84315);
+      position: relative;
+      margin: auto;
+      transform-style: preserve-3d;
+      transition: transform 1s ease-in-out;
+      cursor: pointer;
+      border-radius: 10px;
+    }
+
+    .ribbon {
+      position: absolute;
+      width: 20px;
+      height: 150px;
+      background: gold;
+      left: 50%;
+      transform: translateX(-50%);
+      transition: opacity 0.5s;
+    }
+
+    .ribbon::before {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 20px;
+      background: gold;
+      top: 50%;
+      left: -65px;
+    }
+
+    .instruction {
+      margin-top: 20px;
+      font-weight: bold;
+      font-size: 18px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .photo {
+      width: 200px;
+      height: auto;
+      opacity: 0;
+      transform: scale(0.5);
+      transition: all 1s ease-in-out;
+      margin-top: 10px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    .show {
+      opacity: 1;
+      transform: scale(1);
+    }
+  </style>
+</head>
+<body>
+  <div class="gift-container">
+    <div class="box" id="giftBox">
+      <div class="ribbon" id="ribbon"></div>
+    </div>
+    <div class="instruction" id="instruction">Klik untuk membuka pita 🎀</div>
+    <img src="df1fca4419439a78af23d2538fc4331e.jpg" alt="Hadiah" id="finalPhoto" class="photo hidden">
+  </div>
+
+  <script>
+    let step = 0;
+    const ribbon = document.getElementById("ribbon");
+    const box = document.getElementById("giftBox");
+    const instruction = document.getElementById("instruction");
+    const finalPhoto = document.getElementById("finalPhoto");
+
+    box.addEventListener("click", () => {
+      if (step === 0) {
+        ribbon.style.opacity = "0";
+        instruction.innerText = "Klik lagi untuk membuka kotak 📦";
+        step++;
+      } else if (step === 1) {
+        box.style.transform = "rotateX(180deg)";
+        instruction.innerText = "Selamat! 🎉 Ini hadiahmu!";
+        setTimeout(() => {
+          box.style.display = "none";
+          finalPhoto.classList.remove("hidden");
+          finalPhoto.classList.add("show");
+        }, 1000);
+        step++;
+      }
+    });
+  </script>
+</body>
+</html>
